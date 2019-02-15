@@ -1,0 +1,34 @@
+{
+  "name": "ab224qr-examination-2",
+  "version": "1.0.0",
+  "description": "Examination Assignment 2 - Sticky Snippets",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "devstart": "nodemon --inspect ./app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/1dv023/ab224qr-examination-2.git"
+  },
+  "author": "Adam Bergman",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/1dv023/ab224qr-examination-2/issues"
+  },
+  "homepage": "https://github.com/1dv023/ab224qr-examination-2#readme",
+  "dependencies": {
+    "dotenv": "^6.2.0",
+    "express": "^4.16.4",
+    "express-hbs": "^2.0.2",
+    "express-session": "^1.15.6",
+    "mongoose": "^5.4.12",
+    "morgan": "^1.9.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.10"
+  },
+  "nodemonConfig": {
+    "ext": "js,json,hbs,html,css"
+  }
+}
