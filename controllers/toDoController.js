@@ -22,7 +22,7 @@ toDoController.index = async (req, res, next) => {
           done: toDoItem.done
         }))
     }
-    res.render('toDo/index', { locals })
+    res.render('todo/index', { locals })
   } catch (error) {
     next(error)
   }
@@ -36,7 +36,7 @@ toDoController.create = async (req, res, next) => {
     description: '',
     done: false
   }
-  res.render('toDo/create', { locals })
+  res.render('todo/create', { locals })
 }
 
 /**
@@ -70,7 +70,7 @@ toDoController.edit = async (req, res, next) => {
       description: toDoItem.description,
       done: toDoItem.done
     }
-    res.render('toDo/edit', { locals })
+    res.render('todo/edit', { locals })
   } catch (error) {
     req.session.flash = { type: 'danger', text: error.message }
     res.redirect('.')
@@ -89,11 +89,11 @@ toDoController.editPost = async (req, res, next) => {
 
     if (result.nModified === 1) {
       req.session.flash = { type: 'success', text: 'To-do item was updated successfully.' }
-    } else {
-      req.session.flash = {
-        type: 'danger',
-        text: 'The to-do item you attempted to update was removed by another user after you got the original values.'
-      }
+    // } else {
+    //   req.session.flash = {
+    //     type: 'danger',
+    //     text: 'The to-do item you attempted to update was removed by another user after you got the original values.'
+    //   }
     }
     res.redirect('.')
   } catch (error) {
@@ -113,7 +113,7 @@ toDoController.delete = async (req, res, next) => {
       description: toDoItem.description,
       done: toDoItem.done
     }
-    res.render('toDo/delete', { locals })
+    res.render('todo/delete', { locals })
   } catch (error) {
     req.session.flash = { type: 'danger', text: error.message }
     res.redirect('.')

@@ -20,7 +20,7 @@ const toDoItemSchema = new mongoose.Schema({
     type: String,
     required: true,
     trim: true,
-    minlength: 1
+    minlength: 3
   },
   done: {
     type: Boolean,
