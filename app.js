@@ -31,7 +31,7 @@ app.set('views', path.join(__dirname, 'views'))
 
 // additional middleware
 app.use(logger('dev'))
-app.use(express.urlencoded({ extended: false })) // Not needed? (Working without)
+app.use(express.urlencoded({ extended: false }))
 app.use(express.static(path.join(__dirname, 'public')))
 
 // setup and use session middleware (https://github.com/expressjs/session)
@@ -49,17 +49,24 @@ app.use(session(sessionOptions))
 
 // middleware to be executed before the routes
 app.use((req, res, next) => {
-  // flash messages - survives only a round trip
   res.locals.flash = req.session.flash
   delete req.session.flash
-
   next()
 })
+
+const redirectHome = (req, res, next) => {
+  if (req.session.username) {
+    res.redirect('/')
+  } else {
+    next()
+  }
+}
 
 // routes
 app.use('/', require('./routes/homeRouter'))
 app.use('/todo', require('./routes/toDoRouter'))
-app.use('/login', require('./routes/loginRouter'))
+app.use('/login', redirectHome, require('./routes/loginRouter'))
+app.use('/register', redirectHome, require('./routes/registerRouter'))
 
 // catch 404
 app.use((req, res, next) => {

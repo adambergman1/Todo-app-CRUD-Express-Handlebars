@@ -1,8 +1,8 @@
 <h1>
-  <span class="fas fa-sign-in-alt"></span> Login
+  <span class="fas fa-sign-in-alt"></span> Register account
 </h1>
 
-<form method="post" action="/login">
+<form method="post" action="/register">
 <div class="row">
   <div class="col-sm-6">
     <input type="text" class="form-control" name="username" placeholder="Enter your username here" minlength="1" maxlength="32" required="required" autofocus="autofocus" />
@@ -10,9 +10,13 @@
   <div class="col-sm-6">
         <input type="password" class="form-control" name="password" placeholder="Enter your password here" minlength="1" maxlength="32" required="required">
   </div>
+  <br> <br>
+    <div class="col-sm-12">
+    <input type="email" class="form-control" name="email" placeholder="Enter your email here" minlength="1" maxlength="32" required="required" />
+</div>
 </div>
 <br>
 <div class="row">
-  <button type="submit" class="btn btn-lg btn-primary">Login</button>
+  <button type="submit" class="btn btn-lg btn-success">Register</button>
   </div>
 </form>
