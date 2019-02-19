@@ -24,10 +24,14 @@
           <a class="nav-link" href="/register">Register</a>
         </li>
          {{/unless}}
-
-
-        <li class="logged-in"><p>{{#if username.length}} Logged in as {{username}} {{/if}} 
-        </p></li>
+         {{#if username.length}}
+         <li class="nav-item">
+          <a class="nav-link" href="/#logout">Log out</a>
+        </li>
+        <li class="logged-in">
+          <p> Logged in as {{username}}</p>
+          </li>
+          {{/if}} 
       </ul>
     </div>
   </nav>

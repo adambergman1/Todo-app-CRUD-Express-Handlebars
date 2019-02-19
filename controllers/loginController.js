@@ -9,6 +9,7 @@ loginController.loginUser = async (req, res) => {
 
   await sess.save()
 
-  res.render('todo/index', { username: req.body.username })
+  res.render('home/index', { username: req.body.username })
 }
+
 module.exports = loginController

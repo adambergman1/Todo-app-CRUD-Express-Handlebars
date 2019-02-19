@@ -6,24 +6,31 @@
  */
 
 const mongoose = require('mongoose')
-const crypto = require('crypto')
+mongoose.set('useCreateIndex', true)
+const bcrypt = require('bcrypt')
 
 // Create a schema.
 const userSchema = new mongoose.Schema({
-  username: { type: String, lowercase: true, required: true, match: [/^[a-zA-Z0-9]+$/] },
-  email: { type: String, lowercase: true, required: true, match: [/\S+@\S+\.\S+/] },
-  hash: String,
-  salt: String
+  username: { type: String, lowercase: true, required: true, unique: true, match: [/^[a-zA-Z0-9]+$/] },
+  email: { type: String, lowercase: true, required: true, unique: true, match: [/\S+@\S+\.\S+/] },
+  password: { type: String, required: true }
 }, { timestamps: true })
 
-userSchema.methods.setPassword = password => {
-  this.salt = crypto.randomBytes(16).toString('hex')
-  this.hash = crypto.pbkdf2Sync(password, this.salt, 10000, 512, 'sha512').toString('hex')
-}
+userSchema.path('password').validate((password) => { return password.length >= 8 },
+  'The password must be of minimum length 8 characters.')
 
-userSchema.methods.validPassword = password => {
-  let hash = crypto.pbkdf2Sync(password, this.salt, 10000, 512, 'sha512').toString('hex')
-  return this.hash === hash
+userSchema.pre('save', async function (next) {
+  let user = this
+
+  if (user.isModified('password') || user.isNew) {
+    let hashPwd = await bcrypt.hash(user.password, 12)
+    user.password = hashPwd
+  }
+  next()
+})
+
+userSchema.methods.comparePassword = function (candidatePassword) {
+  return bcrypt.compare(candidatePassword, this.password)
 }
 
 // Create a model using the schema.

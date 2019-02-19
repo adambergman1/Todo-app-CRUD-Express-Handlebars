@@ -34,10 +34,10 @@ app.use(logger('dev'))
 app.use(express.urlencoded({ extended: false }))
 app.use(express.static(path.join(__dirname, 'public')))
 
-// setup and use session middleware (https://github.com/expressjs/session)
+// setup and use session middleware
 const sessionOptions = {
-  name: 'To do item', // Don't use default session cookie name.
-  secret: 'uV9wjNeEtsDPz5v38bKPQPxAt8vkASty', // Change it!!! The secret is used to hash the session with HMAC.
+  name: 'scrud',
+  secret: 'uV9wjNeEtsDPz5v38bKPQPxAt8vkASty',
   resave: false, // Resave even if a request is not changing the session.
   saveUninitialized: false, // Don't save a created but not modified session.
   cookie: {
@@ -62,19 +62,12 @@ app.use((req, res, next) => {
   next()
 })
 
-const redirectHome = (req, res, next) => {
-  if (req.session.username) {
-    res.redirect('/')
-  } else {
-    next()
-  }
-}
-
 // routes
 app.use('/', require('./routes/homeRouter'))
 app.use('/todo', require('./routes/toDoRouter'))
-app.use('/login', redirectHome, require('./routes/loginRouter'))
+app.use('/login', require('./routes/loginRouter'))
 app.use('/register', require('./routes/registerRouter'))
+app.use('/#logout', require('./routes/logoutRouter'))
 
 // catch 404
 app.use((req, res, next) => {
