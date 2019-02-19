@@ -102,3 +102,13 @@ html {
   .card-text {
     font-family: 'Consolas', 'Courier New', Courier, monospace
   }
+
+  .logged-in {
+    position: absolute;
+    right: 30px;
+  }
+
+  .logged-in p {
+    text-align: right;
+    color: #fff;
+  }

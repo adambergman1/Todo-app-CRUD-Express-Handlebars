@@ -47,6 +47,14 @@ const sessionOptions = {
 
 app.use(session(sessionOptions))
 
+app.use((req, res, next) => {
+  if (req.session && req.session.username) {
+    res.session = { username: req.session.username }
+    res.locals.username = req.session.username
+  }
+  next()
+})
+
 // middleware to be executed before the routes
 app.use((req, res, next) => {
   res.locals.flash = req.session.flash
