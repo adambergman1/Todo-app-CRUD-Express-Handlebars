@@ -8,12 +8,12 @@ registerController.registerUser = async (req, res) => {
   const newUser = new User({
     username: req.body.username,
     email: req.body.email,
-    pass: req.body.password
+    password: req.body.password
   })
 
   await newUser.save()
 
-  req.session.flash = { type: 'success', text: 'You are registrered!' }
+  req.session.flash = { type: 'success', text: 'You are registrered! Please re-enter your credentials to login.' }
   res.redirect('/login')
 }
 

@@ -1,6 +1,6 @@
 const logoutController = {}
 
-logoutController.logout = (req, res, next) => {
+logoutController.logout = (req, res) => {
   console.log('loggar ut')
   req.session.destroy(err => {
     if (err) { console.log(err) } else {
