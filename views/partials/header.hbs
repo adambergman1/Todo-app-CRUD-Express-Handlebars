@@ -16,12 +16,16 @@
         <li class="nav-item">
           <a class="nav-link" href="/todo/create">Create</a>
         </li>
+        {{#unless username.length}}
         <li class="nav-item">
           <a class="nav-link" href="/login">Login</a>
         </li>
          <li class="nav-item">
           <a class="nav-link" href="/register">Register</a>
         </li>
+         {{/unless}}
+
+
         <li class="logged-in"><p>{{#if username.length}} Logged in as {{username}} {{/if}} 
         </p></li>
       </ul>

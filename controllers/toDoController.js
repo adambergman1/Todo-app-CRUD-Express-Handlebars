@@ -22,7 +22,6 @@ toDoController.index = async (req, res, next) => {
           done: toDoItem.done
         }))
     }
-    console.log('hello', req.session)
     res.render('todo/index', { locals })
   } catch (error) {
     next(error)
