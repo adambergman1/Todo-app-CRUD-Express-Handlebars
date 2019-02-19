@@ -26,7 +26,9 @@
          {{/unless}}
          {{#if username.length}}
          <li class="nav-item">
-          <a class="nav-link" href="/#logout">Log out</a>
+           <form method="post" action="/logout">
+          <button type="submit" class="">Log out</button>
+          </form>
         </li>
         <li class="logged-in">
           <p> Logged in as {{username}}</p>

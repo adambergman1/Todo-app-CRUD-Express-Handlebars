@@ -67,7 +67,7 @@ app.use('/', require('./routes/homeRouter'))
 app.use('/todo', require('./routes/toDoRouter'))
 app.use('/login', require('./routes/loginRouter'))
 app.use('/register', require('./routes/registerRouter'))
-app.use('/#logout', require('./routes/logoutRouter'))
+app.use('/logout', require('./routes/logoutRouter'))
 
 // catch 404
 app.use((req, res, next) => {

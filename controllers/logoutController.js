@@ -1,11 +1,13 @@
 const logoutController = {}
 
-logoutController.logout = (req, res) => {
+logoutController.logout = (req, res, next) => {
   console.log('loggar ut')
   req.session.destroy(err => {
-    if (err) { console.log(err) } else {
+    if (err) {
+      console.log(err)
+    } else {
       res.clearCookie('scrud')
-      res.redirect('/home/index')
+      res.redirect('/')
       console.log('loggar ut')
     }
   })
