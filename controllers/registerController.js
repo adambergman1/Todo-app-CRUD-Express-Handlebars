@@ -14,7 +14,7 @@ registerController.registerUser = async (req, res) => {
   await newUser.save()
 
   req.session.flash = { type: 'success', text: 'You are registrered!' }
-  res.redirect('.')
+  res.redirect('/login')
 }
 
 module.exports = registerController

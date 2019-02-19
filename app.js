@@ -74,7 +74,7 @@ const redirectHome = (req, res, next) => {
 app.use('/', require('./routes/homeRouter'))
 app.use('/todo', require('./routes/toDoRouter'))
 app.use('/login', redirectHome, require('./routes/loginRouter'))
-app.use('/register', redirectHome, require('./routes/registerRouter'))
+app.use('/register', require('./routes/registerRouter'))
 
 // catch 404
 app.use((req, res, next) => {
