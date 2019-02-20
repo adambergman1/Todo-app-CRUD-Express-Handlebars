@@ -26,7 +26,8 @@ const toDoItemSchema = new mongoose.Schema({
     type: Boolean,
     required: true,
     default: false
-  }
+  },
+  username: { type: String }
 })
 
 // Create a model using the schema.

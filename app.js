@@ -12,6 +12,7 @@ const session = require('express-session')
 const path = require('path')
 const logger = require('morgan')
 const mongoose = require('./config/mongoose')
+const middlewares = require('./middleware/middleware')
 
 const app = express()
 
@@ -41,7 +42,9 @@ const sessionOptions = {
   resave: false, // Resave even if a request is not changing the session.
   saveUninitialized: false, // Don't save a created but not modified session.
   cookie: {
-    maxAge: 1000 * 60 * 60 * 24 // 1 day
+    maxAge: 1000 * 60 * 60 * 24, // 1 day
+    httpOnly: true, // dont allow client script messing with the cookie
+    sameSite: 'lax' // protect against POST csrf-attack
   }
 }
 
@@ -65,8 +68,8 @@ app.use((req, res, next) => {
 // routes
 app.use('/', require('./routes/homeRouter'))
 app.use('/todo', require('./routes/toDoRouter'))
-app.use('/login', require('./routes/loginRouter'))
-app.use('/register', require('./routes/registerRouter'))
+app.use('/login', middlewares.redirectHomeIfUserIsLoggedIn, require('./routes/loginRouter'))
+app.use('/register', middlewares.redirectHomeIfUserIsLoggedIn, require('./routes/registerRouter'))
 app.use('/logout', require('./routes/logoutRouter'))
 
 // catch 404

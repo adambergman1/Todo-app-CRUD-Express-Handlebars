@@ -1,12 +1,14 @@
 <header>
   <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
     <a class="navbar-brand" href="#">Just To-do It!</a>
+
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse"
       aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
+
     <div class="collapse navbar-collapse" id="navbarCollapse">
-      <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <ul class="navbar-nav">
         <li class="nav-item">
           <a class="nav-link" href="/">Home</a>
         </li>
@@ -16,6 +18,8 @@
         <li class="nav-item">
           <a class="nav-link" href="/todo/create">Create</a>
         </li>
+        </ul>
+        <ul class="navbar-nav navbar-right"></ul>
         {{#unless username.length}}
         <li class="nav-item">
           <a class="nav-link" href="/login">Login</a>
@@ -24,13 +28,14 @@
           <a class="nav-link" href="/register">Register</a>
         </li>
          {{/unless}}
-         {{#if username.length}}
-         <li class="nav-item">
+      
+        {{#if username.length}}
+         <li class="nav-item logged-in">
            <form method="post" action="/logout">
-          <button type="submit" class="">Log out</button>
+          <button type="submit" class="logout-btn">Log out</button>
           </form>
         </li>
-        <li class="logged-in">
+        <li class="nav-item logged-in">
           <p> Logged in as {{username}}</p>
           </li>
           {{/if}} 

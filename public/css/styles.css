@@ -103,12 +103,32 @@ html {
     font-family: 'Consolas', 'Courier New', Courier, monospace
   }
 
-  .logged-in {
-    position: absolute;
-    right: 30px;
+  @media (min-width: 768px) {
+    .navbar-nav {
+      float: left;
+    }
+  .navbar-right {
+    float: right;
   }
+}
 
   .logged-in p {
     text-align: right;
     color: #fff;
+    margin-bottom: 0;
+  }
+
+  .logout-btn {
+    border: 0;
+    background: transparent;
+    color: rgba(255,255,255,.5);
+    cursor: pointer;
+  }
+
+  .logout-btn:hover {
+    color: rgba(255,255,255,.75);
+  }
+
+  .navbar-nav {
+    align-items: center;
   }

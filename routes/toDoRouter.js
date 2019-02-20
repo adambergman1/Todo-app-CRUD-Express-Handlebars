@@ -9,21 +9,22 @@ const express = require('express')
 const router = express.Router()
 
 const controller = require('../controllers/toDoController')
+const middlewares = require('../middleware/middleware')
 
 // GET /
 router.get('/', controller.index)
 
 // GET, POST /create
 router.route('/create')
-  .get(controller.create)
+  .get(middlewares.redirectHomeIfUserIsNotLoggedIn, controller.create)
   .post(controller.createPost)
 
 // GET, POST /edit
-router.get('/edit/:id', controller.edit)
+router.get('/edit/:id', middlewares.redirectHomeIfUserIsNotLoggedIn, controller.edit)
 router.post('/edit', controller.editPost)
 
 // GET, POST  /delete
-router.get('/delete/:id', controller.delete)
+router.get('/delete/:id', middlewares.redirectHomeIfUserIsNotLoggedIn, controller.delete)
 router.post('/delete', controller.deletePost)
 
 // Exports.

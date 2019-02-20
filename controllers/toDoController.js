@@ -19,7 +19,8 @@ toDoController.index = async (req, res, next) => {
         .map(toDoItem => ({
           id: toDoItem._id,
           description: toDoItem.description,
-          done: toDoItem.done
+          done: toDoItem.done,
+          username: toDoItem.username
         }))
     }
     res.render('todo/index', { locals })
@@ -36,6 +37,7 @@ toDoController.create = async (req, res, next) => {
     description: '',
     done: false
   }
+
   res.render('todo/create', { locals })
 }
 
@@ -46,9 +48,9 @@ toDoController.createPost = async (req, res, next) => {
   try {
     const toDoItem = new ToDoItem({
       description: req.body.description,
-      done: req.body.done
+      done: req.body.done,
+      username: req.session.username
     })
-
     await toDoItem.save()
 
     req.session.flash = { type: 'success', text: 'To-do item was created successfully.' }
@@ -65,12 +67,16 @@ toDoController.createPost = async (req, res, next) => {
 toDoController.edit = async (req, res, next) => {
   try {
     const toDoItem = await ToDoItem.findOne({ _id: req.params.id })
-    const locals = {
-      id: toDoItem._id,
-      description: toDoItem.description,
-      done: toDoItem.done
+    if (toDoItem.username === req.session.username) {
+      const locals = {
+        id: toDoItem._id,
+        description: toDoItem.description,
+        done: toDoItem.done
+      }
+      res.render('todo/edit', { locals })
+    } else {
+      res.redirect('/')
     }
-    res.render('todo/edit', { locals })
   } catch (error) {
     req.session.flash = { type: 'danger', text: error.message }
     res.redirect('.')
@@ -89,11 +95,6 @@ toDoController.editPost = async (req, res, next) => {
 
     if (result.nModified === 1) {
       req.session.flash = { type: 'success', text: 'To-do item was updated successfully.' }
-    // } else {
-    //   req.session.flash = {
-    //     type: 'danger',
-    //     text: 'The to-do item you attempted to update was removed by another user after you got the original values.'
-    //   }
     }
     res.redirect('.')
   } catch (error) {

@@ -11,13 +11,16 @@ loginController.loginUser = async (req, res) => {
   }
   if (user) {
     let pwdMatch = await user.comparePassword(req.body.password)
-    if (user && pwdMatch) {
+    if (pwdMatch) {
       let sess = req.session
       sess.username = req.body.username
       sess.id = req.sessionID
 
       await sess.save()
-      res.render('home/index', { username: req.body.username })
+      res.redirect('.')
+    } else {
+      req.session.flash = { type: 'danger', text: 'Please check your credentials' }
+      res.redirect('/login')
     }
   }
 }
