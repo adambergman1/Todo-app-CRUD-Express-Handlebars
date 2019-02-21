@@ -5,7 +5,11 @@
  * @version 1.0
  */
 
-require('dotenv').config()
+// require('dotenv').config()
+require('dotenv-safe').config({
+  allowEmptyValues: true,
+  example: '.env'
+})
 const express = require('express')
 const hbs = require('express-hbs')
 const session = require('express-session')
@@ -74,14 +78,20 @@ app.use('/logout', require('./routes/logoutRouter'))
 
 // catch 404
 app.use((req, res, next) => {
+  console.log('req', req.message)
   res.status(404)
   res.sendFile(path.join(__dirname, 'public', '404.html'))
 })
 
 // error handler
 app.use((err, req, res, next) => {
-  res.status(err.status || 500)
-  res.send(err.message || 'Internal Server Error')
+  if (err.message === '403') {
+    res.status(err.status || '403')
+    res.sendFile(path.join(__dirname, 'public', '403.html'))
+  } else if (err.status === '500') {
+    res.status(err.status || 500)
+    res.send(err.message || 'Internal Server Error')
+  }
 })
 
 const port = process.env.PORT || 8000

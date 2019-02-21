@@ -8,7 +8,7 @@ const redirectHomeIfUserIsLoggedIn = (req, res, next) => {
 
 const redirectHomeIfUserIsNotLoggedIn = (req, res, next) => {
   if (!req.session.username) {
-    res.redirect('/')
+    throw new Error('403')
   } else {
     next()
   }
