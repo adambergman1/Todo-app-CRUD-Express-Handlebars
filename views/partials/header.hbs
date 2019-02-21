@@ -1,5 +1,5 @@
 <header>
-  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark">
     <a class="navbar-brand" href="#">Just To-do It!</a>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse"
@@ -15,9 +15,11 @@
         <li class="nav-item">
           <a class="nav-link" href="/todo/">List</a>
         </li>
+        {{#if username.length}}
         <li class="nav-item">
           <a class="nav-link" href="/todo/create">Create</a>
         </li>
+        {{/if}}
         </ul>
         <ul class="navbar-nav navbar-right"></ul>
         {{#unless username.length}}

@@ -86,3 +86,10 @@ app.use((err, req, res, next) => {
 
 const port = process.env.PORT || 8000
 app.listen(port, () => console.log(`Server running at http://localhost:${port}/`))
+
+hbs.registerHelper('ifCond', function (v1, v2, options) {
+  if (v1 === v2) {
+    return options.fn(this)
+  }
+  return options.inverse(this)
+})

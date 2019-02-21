@@ -20,8 +20,14 @@ toDoController.index = async (req, res, next) => {
           id: toDoItem._id,
           description: toDoItem.description,
           done: toDoItem.done,
-          username: toDoItem.username
+          username: toDoItem.username,
+          owner: toDoItem.username === req.session.username
         }))
+    }
+    for (let i = 0; i < locals.toDoItems.length; i++) {
+      if (locals.toDoItems[i].username === req.session.username) {
+        console.log('same username')
+      }
     }
     res.render('todo/index', { locals })
   } catch (error) {
@@ -75,7 +81,8 @@ toDoController.edit = async (req, res, next) => {
       }
       res.render('todo/edit', { locals })
     } else {
-      res.redirect('/')
+      req.session.flash = { type: 'danger', text: 'You are not allowed to edit this post' }
+      res.redirect('/todo')
     }
   } catch (error) {
     req.session.flash = { type: 'danger', text: error.message }
@@ -109,12 +116,17 @@ toDoController.editPost = async (req, res, next) => {
 toDoController.delete = async (req, res, next) => {
   try {
     const toDoItem = await ToDoItem.findOne({ _id: req.params.id })
-    const locals = {
-      id: toDoItem._id,
-      description: toDoItem.description,
-      done: toDoItem.done
+    if (toDoItem.username === req.session.username) {
+      const locals = {
+        id: toDoItem._id,
+        description: toDoItem.description,
+        done: toDoItem.done
+      }
+      res.render('todo/delete', { locals })
+    } else {
+      req.session.flash = { type: 'danger', text: 'You are not allowed to delete this post' }
+      res.redirect('/todo')
     }
-    res.render('todo/delete', { locals })
   } catch (error) {
     req.session.flash = { type: 'danger', text: error.message }
     res.redirect('.')
