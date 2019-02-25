@@ -1,5 +1,5 @@
 /**
- * Home routes.
+ * homeRouter.
  *
  * @author Adam Bergman
  * @version 1.0
