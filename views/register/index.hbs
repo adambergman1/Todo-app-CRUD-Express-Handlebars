@@ -1,22 +1,24 @@
-<h1>
-  <span class="fas fa-sign-in-alt"></span> Register account
-</h1>
+<div class="smaller-width">
+  <h1>
+    <span class="fas fa-sign-in-alt"></span> Register account
+  </h1>
 
-<form method="post" action="/register">
-<div class="row">
-  <div class="col-sm-6">
-    <input type="text" class="form-control" name="username" placeholder="Enter your username here" minlength="1" maxlength="32" required="required" autofocus="autofocus" />
-</div>
-  <div class="col-sm-6">
-        <input type="password" class="form-control" name="password" placeholder="Enter your password here" minlength="1" maxlength="32" required="required">
+  <form method="post" action="/register">
+  <div class="row">
+    <div class="col-sm-6">
+      <input type="text" class="form-control" name="username" placeholder="Enter your username here" minlength="3" maxlength="32" required="required" autofocus="autofocus" />
   </div>
-  <br> <br>
-    <div class="col-sm-12">
-    <input type="email" class="form-control" name="email" placeholder="Enter your email here" minlength="1" maxlength="32" required="required" />
-</div>
-</div>
-<br>
-<div class="row">
-  <button type="submit" class="btn btn-lg btn-success">Register</button>
+    <div class="col-sm-6">
+          <input type="password" class="form-control" name="password" placeholder="Enter your password here" minlength="6" maxlength="32" required="required">
+    </div>
+    <br> <br>
+      <div class="col-sm-12">
+      <input type="email" class="form-control" name="email" placeholder="Enter your email here" minlength="6" maxlength="32" required="required" />
   </div>
-</form>
+  </div>
+  <br>
+  <div class="row">
+    <button type="submit" class="btn btn-lg btn-success">Register</button>
+    </div>
+  </form>
+</div>

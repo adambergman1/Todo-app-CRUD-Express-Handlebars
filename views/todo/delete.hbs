@@ -5,7 +5,7 @@
 <form method="post" action="/todo/delete">
   <input type="hidden" name="id" value="{{locals.id}}" />
   <div class="form-group">
-    <input type="text" class="form-control" name="description" placeholder="Update to-do description here" value="{{locals.description}}" readonly="readonly" />
+    <textarea class="form-control white-space" name="description" placeholder="Your description here" readonly="readonly">{{locals.description}}</textarea>
   </div>
   <button type="submit" class="btn btn-lg btn-primary" autofocus="autofocus">Delete</button>
 </form>

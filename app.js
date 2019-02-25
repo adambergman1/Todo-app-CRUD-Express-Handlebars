@@ -54,6 +54,7 @@ const sessionOptions = {
 
 app.use(session(sessionOptions))
 
+// middleware to be executed before the routes
 app.use((req, res, next) => {
   if (req.session && req.session.username) {
     res.session = { username: req.session.username }
@@ -62,7 +63,6 @@ app.use((req, res, next) => {
   next()
 })
 
-// middleware to be executed before the routes
 app.use((req, res, next) => {
   res.locals.flash = req.session.flash
   delete req.session.flash
@@ -72,8 +72,8 @@ app.use((req, res, next) => {
 // routes
 app.use('/', require('./routes/homeRouter'))
 app.use('/todo', require('./routes/toDoRouter'))
-app.use('/login', middlewares.redirectHomeIfUserIsLoggedIn, require('./routes/loginRouter'))
-app.use('/register', middlewares.redirectHomeIfUserIsLoggedIn, require('./routes/registerRouter'))
+app.use('/login', middlewares.redirectHome, require('./routes/loginRouter'))
+app.use('/register', middlewares.redirectHome, require('./routes/registerRouter'))
 app.use('/logout', require('./routes/logoutRouter'))
 
 // catch 404
@@ -96,10 +96,3 @@ app.use((err, req, res, next) => {
 
 const port = process.env.PORT || 8000
 app.listen(port, () => console.log(`Server running at http://localhost:${port}/`))
-
-hbs.registerHelper('ifCond', function (v1, v2, options) {
-  if (v1 === v2) {
-    return options.fn(this)
-  }
-  return options.inverse(this)
-})

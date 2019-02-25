@@ -1,12 +1,13 @@
-const redirectHomeIfUserIsLoggedIn = (req, res, next) => {
+const redirectHome = (req, res, next) => {
   if (req.session.username) {
+    req.session.flash = { type: 'danger', text: 'You are already logged in' }
     res.redirect('/')
   } else {
     next()
   }
 }
 
-const redirectHomeIfUserIsNotLoggedIn = (req, res, next) => {
+const notLoggedInUser = (req, res, next) => {
   if (!req.session.username) {
     throw new Error('403')
   } else {
@@ -15,6 +16,6 @@ const redirectHomeIfUserIsNotLoggedIn = (req, res, next) => {
 }
 
 module.exports = {
-  redirectHomeIfUserIsLoggedIn: redirectHomeIfUserIsLoggedIn,
-  redirectHomeIfUserIsNotLoggedIn: redirectHomeIfUserIsNotLoggedIn
+  redirectHome: redirectHome,
+  notLoggedInUser: notLoggedInUser
 }

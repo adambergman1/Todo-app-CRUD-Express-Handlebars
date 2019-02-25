@@ -68,3 +68,17 @@ html {
   .visible {
     visibility: visible;
   }
+
+  .smaller-width {
+    max-width: 700px;
+    margin: auto auto;
+  }
+
+  .white-space {
+    white-space: pre;
+  }
+
+  .scroll {
+    overflow-y: scroll;
+    max-height: 100px;
+  }
