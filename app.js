@@ -78,7 +78,6 @@ app.use('/logout', require('./routes/logoutRouter'))
 
 // catch 404
 app.use((req, res, next) => {
-  console.log('req', req.message)
   res.status(404)
   res.sendFile(path.join(__dirname, 'public', '404.html'))
 })
