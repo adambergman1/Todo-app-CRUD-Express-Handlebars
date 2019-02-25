@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "devstart": "nodemon --inspect ./app.js"
+    "devstart": "nodemon --inspect ./app.js",
+    "lint": "standard"
   },
   "repository": {
     "type": "git",
