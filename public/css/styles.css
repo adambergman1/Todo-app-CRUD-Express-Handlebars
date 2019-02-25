@@ -82,3 +82,25 @@ html {
     overflow-y: scroll;
     max-height: 100px;
   }
+
+  .error {
+    color: #888;
+    display: table;
+    font-family: sans-serif;
+    height: 100%;
+    text-align: center;
+    width: 100%;
+    vertical-align: middle;
+    margin: 2em auto;
+}
+
+.error h1 {
+    color: #555;
+    font-size: 2em;
+    font-weight: 400;
+}
+
+.error p {
+    margin: 0 auto;
+    width: 280px;
+}
