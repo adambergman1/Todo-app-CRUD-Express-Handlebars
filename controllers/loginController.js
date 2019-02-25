@@ -1,8 +1,21 @@
+/**
+ * loginController.
+ *
+ * @author Adam Bergman
+ * @version 1.0
+ */
+
 const User = require('../models/user')
 const loginController = {}
 
+/**
+ * login GET
+ */
 loginController.login = (req, res, next) => res.render('login/index')
 
+/**
+ * login POST
+ */
 loginController.loginUser = async (req, res) => {
   let user = await User.findOne({ username: req.body.username })
   if (!user) {

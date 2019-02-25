@@ -18,9 +18,11 @@ const userSchema = new mongoose.Schema({
   timestamps: true
 })
 
+// Extra validation to ensure no password is submitted to the DB shorter than 6 characters.
 userSchema.path('password').validate((password) => { return password.length >= 6 },
   'The password must be of minimum length 6 characters.')
 
+// Hash the password
 userSchema.pre('save', async function (next) {
   let user = this
 
@@ -31,6 +33,7 @@ userSchema.pre('save', async function (next) {
   next()
 })
 
+// check if password is correct
 userSchema.methods.comparePassword = function (candidatePassword) {
   return bcrypt.compare(candidatePassword, this.password)
 }

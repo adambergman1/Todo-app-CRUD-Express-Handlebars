@@ -24,11 +24,6 @@ toDoController.index = async (req, res, next) => {
           owner: toDoItem.username === req.session.username
         }))
     }
-    for (let i = 0; i < locals.toDoItems.length; i++) {
-      if (locals.toDoItems[i].username === req.session.username) {
-        console.log('same username')
-      }
-    }
     res.render('todo/index', { locals })
   } catch (error) {
     next(error)
