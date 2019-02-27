@@ -11,6 +11,7 @@ require('dotenv-safe').config({
   example: '.env'
 })
 const express = require('express')
+const helmet = require('helmet')
 const hbs = require('express-hbs')
 const session = require('express-session')
 const path = require('path')
@@ -19,6 +20,9 @@ const mongoose = require('./config/mongoose')
 const middlewares = require('./middleware/middleware')
 
 const app = express()
+
+// Use Helmet for extra security
+app.use(helmet())
 
 // connect to the database
 mongoose.connect().catch(error => {
