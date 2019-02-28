@@ -28,7 +28,16 @@ const notLoggedInUser = (req, res, next) => {
   }
 }
 
+const verifyUser = (req, res, next) => {
+  if (res.locals.username === req.session.username) {
+    next()
+  } else {
+    throw new Error('403')
+  }
+}
+
 module.exports = {
   redirectHome: redirectHome,
-  notLoggedInUser: notLoggedInUser
+  notLoggedInUser: notLoggedInUser,
+  verifyUser: verifyUser
 }

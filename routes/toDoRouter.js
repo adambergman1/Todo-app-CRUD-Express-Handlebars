@@ -17,15 +17,15 @@ router.get('/', controller.index)
 // GET, POST /create
 router.route('/create')
   .get(middlewares.notLoggedInUser, controller.create)
-  .post(controller.createPost)
+  .post(middlewares.verifyUser, controller.createPost)
 
 // GET, POST /edit
 router.get('/edit/:id', middlewares.notLoggedInUser, controller.edit)
-router.post('/edit', controller.editPost)
+router.post('/edit', middlewares.verifyUser, controller.editPost)
 
 // GET, POST  /delete
 router.get('/delete/:id', middlewares.notLoggedInUser, controller.delete)
-router.post('/delete', controller.deletePost)
+router.post('/delete', middlewares.verifyUser, controller.deletePost)
 
 // Exports.
 module.exports = router
