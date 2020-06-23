@@ -1,3 +1,3 @@
-# ab224qr-examination-2
+# Todo app with Express & Handlebars
 
-# Be sure to create a .ENV file with the variable DB_PATH with the URL to Mongoose!
+Be sure to create a `.env` file with the variable `DB_PATH` with the URL to Mongoose.
